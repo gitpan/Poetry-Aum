@@ -1,3 +1,8 @@
+package Poetry::Aum;
+use strict;
+use warnings;
+our $VERSION = 1.1;
+
 =head1 NAME
 
 Poetry::Aum
@@ -12,45 +17,50 @@ The sound the breath makes when focused upon.
 
 =head1 DEPENDENCIES
 
-	Abstract::Concept
-	Abstract::Entity
-	Abstract::Interest
+	Poetry::Abstract::Concept
+	Poetry::Abstract::Entity
+	Poetry::Abstract::Interest
 
 =head1 CONSTRUCTOR METHOD new
 
-If you feel you need documentation for this module, please consult
-an experienced Perl Monger.
+If you feel you need documentation for this module, please consult an experienced Perl Monger/Rabbi.
 
 =cut
 
-package Poetry::Aum;
-use strict;
-use warnings;
-our $VERSION = 1;
 
 sub new {
-	my $self = new Abstract::Entity(rand);
-	$self->{ego}  = new Abstract::Concept;
-	$self->{goal} = new Abstract::Interest;
+	my $self = new Poetry::Abstract::Entity(rand);
+	$self->{ego}  = new Poetry::Abstract::Concept;
+	$self->{goal} = new Poetry::Abstract::Interest;
 	bless $self;	# Intentionally classless
 
 	my $philosophy;
 
 	DARK_NIGHT:
-	while (defined $goal){
+	while (exists $self->{goal}){
 		$philosophy = <STDIN>;
 		study $philosophy;
 		if ($self->understands($philosophy)){
-			undef $goal; # implies last DARK_NIGHT;
+			delete $self->{goal}; # implies last DARK_NIGHT;
 		}
 	}
 
 	$self->{$philosophy} = localtime;
-	return;			# Does this hand over my $self?
+	return;			# Hand over my $self
 }
 
 1;
 
+
+=head1 TODO
+
+=item *
+
+Poetry::Abstract classes
+
+=item *
+
+Text-generator engine
 
 =head1 AUTHOR
 
